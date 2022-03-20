@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-from db import get_users, add_user, del_user, update_user, get_user, get_tasks
+from db_users import *
+from db_tasks import *
 
 app = Flask(__name__)
 
