@@ -9,16 +9,46 @@ db_password = os.environ.get('CLOUD_SQL_PASSWORD')
 db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
+# Authentication
 
-'''Tasks CRUD'''
+def auth (request_body):
 
-# READ function to see all tasks
+    user_exists = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
+
+    # Return a 404 if user not in database
+    if user_exists == 0:
+        return 404
+
+    else:
+
+        # Authenticate via API Key if provided
+        if "user_api_key" in request_body:
+            cursor.execute ('SELECT user_api_key FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
+            key = cursor.fetchall()
+            isAuthorized = True if key == request_body ['user_api_key'] else False
+
+        # Authenticate via user password if provided
+        if 'user_password' in request_body:
+            cursor.execute ('SELECT user_md5_pass FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
+            md5Pass_db = cursor.fetchall()
+            isAuthorized = True if md5Pass_db == hashlib.md5(request_body["user_password"].encode('utf-8')) else False
+
+    return isAuthorized
+
+
+
+
+#Tasks CRUD
+
+# READ function to see user tasks
 def get_user_tasks(request_body):
     conn = open_connection()
     with conn.cursor() as cursor:
+
         cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
+        # If task_id has not been specified, read all of a user's tasks
         if task_id == 0:
             result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = ?', user_id)
             tasks = cursor.fetchall()
@@ -27,6 +57,7 @@ def get_user_tasks(request_body):
             else:
                 answer = 'No Active Tasks Found'
 
+        # If task_id has been specified, read the specified task
         else:
             result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = ? AND task_id = ?', (user_id, request_body['task_id']))
             tasks = cursor.fetchall()
@@ -50,26 +81,29 @@ def create_user_tasks(request_body):
         conn.close()
     return 0
 
-
+# UPDATE function that updates all fields that have been specified in the POST request
 def update_user_tasks(request_body):
     conn = open_connection()
     with conn.cursor() as cursor:
         cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
+        # Check if task_title has been sent in the request body and update the database if it has
         if "task_title" in request_body:
             cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_title = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_title'], user_id, request_body['task_id']))
 
+        # Check if task_description has been sent in the request body and update the database if it has
         if "task_description" in request_body:
             cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_description = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_description'], user_id, request_body['task_id']))
 
+        # Check if task_status has been sent in the request body and update the database if it has
         if "task_status" in request_body:
             cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_status = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_status'], user_id, request_body['task_id']))
         conn.commit()
         conn.close()
     return 0
 
-
+# DELETE function that deletes an entire row (or task) from the database
 def delete_user_tasks(request_body):
     conn = open_connection()
     with conn.cursor() as cursor:
