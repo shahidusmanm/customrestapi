@@ -58,13 +58,13 @@ def update_user_tasks(request_body):
         user_id = int(cursor.fetchall())
 
         if "task_title" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_title = ?, task_updated_datetime = NOW() WHERE user_id = ?', (request_body['task_title'], user_id))
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_title = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_title'], user_id, request_body['task_id']))
 
         if "task_description" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_description = ?, task_updated_datetime = NOW() WHERE user_id = ?', (request_body['task_description'], user_id))
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_description = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_description'], user_id, request_body['task_id']))
 
         if "task_status" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_status = ?, task_updated_datetime = NOW() WHERE user_id = ?', (request_body['task_status'], user_id))
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_status = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_status'], user_id, request_body['task_id']))
         conn.commit()
         conn.close()
     return 0
