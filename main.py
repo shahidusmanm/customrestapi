@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from db_users import *
 from db_tasks import *
+from authentication import *
 
 app = Flask(__name__)
 
@@ -9,11 +10,67 @@ app = Flask(__name__)
 # READ all tasks
 @app.route('/tasks', methods=['GET'])
 def tasks():
+    #This function will need an api_key to return
     if request.method == 'GET':
+        #request.headers['api_key']
         # You pass the http request alone
         return get_tasks()
     else:
         return 'error', 404
+
+
+@app.route('/view/tasks', methods=['POST'])
+def view_tasks():
+    # Authentication via key/db_password
+    isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
+
+    if !isAuthorized:
+        return jsonify({"msg: Unauthorized: You don't have permission to view this resouce"}), 401
+
+    # Creating a new task in the database
+    if isAuthorized:
+        tasks = get_user_tasks (request.get_json())
+        return tasks
+
+    return jsonify({"msg: Your request body is missing parameters"}), 400
+
+
+@app.route('/tasks', methods=['POST'])
+def view_tasks():
+    # Authentication via key/db_password
+    isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
+
+    if !isAuthorized:
+        return jsonify({"msg: Unauthorized: You don't have permission to view this resouce"}), 401
+
+    # Creating a new task in the database
+    if isAuthorized:
+        create_user_tasks (request.get_json())
+        return jsonify({"msg: Your task has been created"}), 200
+
+    return jsonify({"msg: Your request body is missing parameters"}), 400
+
+
+@app.route('/tasks/<taskid>', methods=['PUT'])
+def update_tasks (taskid):
+    isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
+    if !isAuthorized:
+        return jsonify({"msg: Unauthorized: You don't have permission to perform this action"}), 401
+
+    if isAuthorized:
+        update_user_tasks (request.get_json(), taskid)
+        return jsonify({"msg: Your task has been updated"}), 200
+
+
+@app.route('/tasks/<taskid>', methods=['DELETE'])
+def delete_tasks (taskid):
+    isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
+    if !isAuthorized:
+        return jsonify({"msg: Unauthorized: You don't have permission to perform this action"}), 200
+
+    if isAuthorized:
+        delete_user_tasks (request.get_json(), taskid)
+        return jsonify({"msg: Your task has been deleted"}), 401
 
 
 '''USERS TABLE'''

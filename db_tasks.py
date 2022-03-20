@@ -46,6 +46,9 @@ def create_user_tasks(request_body):
         cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
+        tasks = cursor.execute('SELECT task_id FROM cloudcomputingtask.tbl_tasks WHERE user_id = ?', user_id)
+        task_id = int(cursor.fetchall())
+
         cursor.execute('INSERT INTO cloudcomputingtask.tbl_tasks (task_id, user_id, user_api_key, task_title, task_description, task_status, task_created_datetime, task_updated_datetime) VALUES(%s,%s, %s, %s,%s, %s, NOW(), NOW())',
         (secrets.token_urlsafe(5), user_id, request_body['user_api_key'], request_body["task_title"], request_body["task_description"], request_body["task_status"]))
         conn.commit()
@@ -75,13 +78,13 @@ def update_user_tasks(request_body):
     return 0
 
 # DELETE function that deletes an entire row (or task) from the database
-def delete_user_tasks(request_body):
+def delete_user_tasks(request_body, task_id):
     conn = open_connection()
     with conn.cursor() as cursor:
         cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
-        cursor.execute('DELETE FROM cloudcomputingtask.tbl_tasks WHERE user_id = ? AND task_id = ?', (user_id, request_body['task_id']))
+        cursor.execute('DELETE FROM cloudcomputingtask.tbl_tasks WHERE user_id = ? AND task_id = ?', (user_id, task_id))
         conn.commit()
         conn.close()
     return 0
