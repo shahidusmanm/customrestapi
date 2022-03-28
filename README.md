@@ -19,7 +19,8 @@ List your Docker images to verify.
 ```
 docker images
 ```
-##### Pushing the Docker image to the Container Registry
+
+
 
 
 #### Docker Container
