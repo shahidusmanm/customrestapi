@@ -24,11 +24,11 @@ def view_tasks():
     # Authentication via key/db_password
     isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
 
-    if !isAuthorized:
+    if isAuthorized == False:
         return jsonify({"msg: Unauthorized: You don't have permission to view this resouce"}), 401
 
     # Creating a new task in the database
-    if isAuthorized:
+    if isAuthorized == True:
         tasks = get_user_tasks (request.get_json())
         return tasks
 
@@ -36,15 +36,15 @@ def view_tasks():
 
 
 @app.route('/tasks', methods=['POST'])
-def view_tasks():
+def create_tasks():
     # Authentication via key/db_password
     isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
 
-    if !isAuthorized:
+    if isAuthorized == False:
         return jsonify({"msg: Unauthorized: You don't have permission to view this resouce"}), 401
 
     # Creating a new task in the database
-    if isAuthorized:
+    if isAuthorized == True:
         create_user_tasks (request.get_json())
         return jsonify({"msg: Your task has been created"}), 200
 
@@ -54,7 +54,7 @@ def view_tasks():
 @app.route('/tasks/<taskid>', methods=['PUT'])
 def update_tasks (taskid):
     isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
-    if !isAuthorized:
+    if isAuthorized == False:
         return jsonify({"msg: Unauthorized: You don't have permission to perform this action"}), 401
 
     if isAuthorized:
@@ -65,7 +65,7 @@ def update_tasks (taskid):
 @app.route('/tasks/<taskid>', methods=['DELETE'])
 def delete_tasks (taskid):
     isAuthorized = auth (request.get_json()['user_api_key'], request.get_json()['user_email'], request.get_json()['user_password'])
-    if !isAuthorized:
+    if isAuthorized == False:
         return jsonify({"msg: Unauthorized: You don't have permission to perform this action"}), 200
 
     if isAuthorized:
@@ -118,4 +118,4 @@ def delete(userid):
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')
