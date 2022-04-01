@@ -8,6 +8,14 @@ app = Flask(__name__)
 '''TASKS TABLE'''
 
 # READ all tasks
+@app.route('/test', methods=['POST'])
+def test():
+    #This function will need an api_key to return
+    email = request.get_json()['user_email']
+    output = test_db_function (email)
+    return output
+
+
 @app.route('/tasks', methods=['GET'])
 def tasks():
     #This function will need an api_key to return

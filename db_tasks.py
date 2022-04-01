@@ -11,6 +11,22 @@ db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 #Tasks CRUD
 
+def open_connection():
+    unix_socket = '/cloudsql/{}'.format(db_connection_name)
+    conn = pymysql.connect(user="cloudcomputing", password="cloudcomputing", db=db_name, host='35.246.95.43', cursorclass=pymysql.cursors.DictCursor)
+    return conn
+
+
+def test_db_function(email):
+    conn = open_connection()
+    with conn.cursor() as cursor:
+
+        cursor.execute('SELECT username FROM cloudcomputingtask.tbl_users WHERE user_email = %s', email)
+        username = cursor.fetchall()
+        return jsonify(username)
+
+
+
 # READ function to see user tasks
 def get_user_tasks(request_body):
     conn = open_connection()
