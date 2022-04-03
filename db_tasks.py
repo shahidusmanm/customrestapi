@@ -30,12 +30,12 @@ def get_user_tasks(request_body):
     conn = open_connection()
     with conn.cursor() as cursor:
 
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
+        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
         # If task_id has not been specified, read all of a user's tasks
         if task_id == 0:
-            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = ?', user_id)
+            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s', user_id)
             tasks = cursor.fetchall()
             if result > 0:
                 answer = jsonify(tasks)
@@ -44,7 +44,7 @@ def get_user_tasks(request_body):
 
         # If task_id has been specified, read the specified task
         else:
-            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = ? AND task_id = ?', (user_id, request_body['task_id']))
+            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s AND task_id = %s', (user_id, request_body['task_id']))
             tasks = cursor.fetchall()
             if result > 0:
                 answer = jsonify(tasks)
@@ -57,10 +57,10 @@ def get_user_tasks(request_body):
 def create_user_tasks(request_body):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
+        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
-        tasks = cursor.execute('SELECT task_id FROM cloudcomputingtask.tbl_tasks WHERE user_id = ?', user_id)
+        tasks = cursor.execute('SELECT task_id FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s', user_id)
         task_id = int(cursor.fetchall())
 
         cursor.execute('INSERT INTO cloudcomputingtask.tbl_tasks (task_id, user_id, user_api_key, task_title, task_description, task_status, task_created_datetime, task_updated_datetime) VALUES(%s,%s, %s, %s,%s, %s, NOW(), NOW())',
@@ -73,20 +73,20 @@ def create_user_tasks(request_body):
 def update_user_tasks(request_body):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
+        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
         # Check if task_title has been sent in the request body and update the database if it has
         if "task_title" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_title = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_title'], user_id, request_body['task_id']))
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_title = %s, task_updated_datetime = NOW() WHERE user_id = %s AND task_id = %s', (request_body['task_title'], user_id, request_body['task_id']))
 
         # Check if task_description has been sent in the request body and update the database if it has
         if "task_description" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_description = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_description'], user_id, request_body['task_id']))
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_description = %s, task_updated_datetime = NOW() WHERE user_id = %s AND task_id = %s', (request_body['task_description'], user_id, request_body['task_id']))
 
         # Check if task_status has been sent in the request body and update the database if it has
         if "task_status" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_status = ?, task_updated_datetime = NOW() WHERE user_id = ? AND task_id = ?', (request_body['task_status'], user_id, request_body['task_id']))
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_status = %s, task_updated_datetime = NOW() WHERE user_id = %s AND task_id = %s', (request_body['task_status'], user_id, request_body['task_id']))
         conn.commit()
         conn.close()
     return 0
@@ -95,10 +95,10 @@ def update_user_tasks(request_body):
 def delete_user_tasks(request_body, task_id):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = ?', request_body['user_email'])
+        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
         user_id = int(cursor.fetchall())
 
-        cursor.execute('DELETE FROM cloudcomputingtask.tbl_tasks WHERE user_id = ? AND task_id = ?', (user_id, task_id))
+        cursor.execute('DELETE FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s AND task_id = %s', (user_id, task_id))
         conn.commit()
         conn.close()
     return 0

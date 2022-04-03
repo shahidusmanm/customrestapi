@@ -19,17 +19,20 @@ def open_connection():
 def login (user_email, user_password):
     conn = open_connection()
     with conn.cursor() as cursor:
-        user_exists = cursor.execute ('SELECT user_md5_pass FROM cloudcomputingtask.tbl_users WHERE user_email = ?', user_email)
-        if user_exists == 0:
+        cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_email = %s', user_email)
+        db_row = cursor.fetchall()
+        user_exists = cursor.rowcount
+        if user_exists < 1:
             session_key = "401, Incorrect email provided"
 
         else:
-            md5Pass_db = str(cursor.fetchall())
-            if md5Pass_db == hashlib.md5(user_password.encode('utf-8')):
-                session_key = hashlib.md5(secrets.token_urlsafe(10).encode('utf-8'))
-                cursor.execute('INSERT INTO cloudcomputingtask.tbl_users (user_api_key) VALUES(%s)', (session_key))
+            if db_row[0]['user_md5_pass'] == hashlib.md5(user_password.encode('utf-8')).hexdigest():
+                session_key = hashlib.md5(secrets.token_urlsafe(10).encode('utf-8')).hexdigest()
+                username = db_row[0]['username']
+                cursor.execute('UPDATE cloudcomputingtask.tbl_users SET user_api_key = %s WHERE username = %s', (session_key, username))
             else:
                 session_key = "401, Incorrect password"
+    conn.commit()
     conn.close()
     return session_key
 
@@ -38,7 +41,7 @@ def login (user_email, user_password):
 def auth (user_api_key):
     conn = open_connection()
     with conn.cursor() as cursor:
-        user_exists = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_api_key = ?', user_api_key)
+        user_exists = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_api_key = %s', user_api_key)
     conn.close()
     if user_exists == 0:
         return False

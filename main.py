@@ -16,6 +16,13 @@ def user_login():
     session_key = login (email, password)
     return jsonify(session_key)
 
+@app.route('/auth', methods=['POST'])
+def user_auth():
+    #This function will need an api_key to return
+    session_key = request.get_json()['session_key']
+    isAuthorized = auth (session_key)
+    return jsonify(isAuthorized)
+
 
 
 # READ all tasks
