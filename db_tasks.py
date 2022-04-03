@@ -2,6 +2,7 @@ import os
 import pymysql
 from flask import jsonify, request
 import secrets
+import random
 import hashlib
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -26,48 +27,41 @@ def test_db_function(email):
     return jsonify(username)
 
 # READ function to see user tasks
-def get_user_tasks(request_body):
+def get_user_tasks(username, task_id):
+
     conn = open_connection()
     with conn.cursor() as cursor:
 
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
-        user_id = int(cursor.fetchall())
-
         # If task_id has not been specified, read all of a user's tasks
         if task_id == 0:
-            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s', user_id)
+            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE username = %s', username)
             tasks = cursor.fetchall()
             if result > 0:
-                answer = jsonify(tasks)
+                answer = tasks
             else:
                 answer = 'No Active Tasks Found'
 
         # If task_id has been specified, read the specified task
         else:
-            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s AND task_id = %s', (user_id, request_body['task_id']))
+            result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_tasks WHERE username = %s AND task_id = %s', (username, task_id))
             tasks = cursor.fetchall()
             if result > 0:
-                answer = jsonify(tasks)
+                answer = tasks
             else:
                 answer = 'Incorrect Task ID'
     conn.close()
     return answer
 
 
-def create_user_tasks(request_body):
+def create_user_tasks(username, title, description, status):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
-        user_id = int(cursor.fetchall())
-
-        tasks = cursor.execute('SELECT task_id FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s', user_id)
-        task_id = int(cursor.fetchall())
-
-        cursor.execute('INSERT INTO cloudcomputingtask.tbl_tasks (task_id, user_id, user_api_key, task_title, task_description, task_status, task_created_datetime, task_updated_datetime) VALUES(%s,%s, %s, %s,%s, %s, NOW(), NOW())',
-        (secrets.token_urlsafe(5), user_id, request_body['user_api_key'], request_body["task_title"], request_body["task_description"], request_body["task_status"]))
-        conn.commit()
-        conn.close()
-    return 0
+        task_id = random.getrandbits(16)
+        cursor.execute('INSERT INTO cloudcomputingtask.tbl_tasks (user_api_key, task_id, username, task_title, task_description, task_status, task_created_datetime, task_updated_datetime) VALUES(%s, %s,%s, %s, %s, %s, NOW(), NOW())',
+        ("00000",task_id, username, title, description, status))
+    conn.commit()
+    conn.close()
+    return task_id
 
 # UPDATE function that updates all fields that have been specified in the POST request
 def update_user_tasks(request_body):
