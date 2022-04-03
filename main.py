@@ -7,6 +7,17 @@ app = Flask(__name__)
 
 '''TASKS TABLE'''
 
+# Defining the login
+@app.route('/login', methods=['POST'])
+def user_login():
+    #This function will need an api_key to return
+    email = request.get_json()['user_email']
+    password = request.get_json()['user_password']
+    session_key = login (email, password)
+    return jsonify(session_key)
+
+
+
 # READ all tasks
 @app.route('/test', methods=['POST'])
 def test():

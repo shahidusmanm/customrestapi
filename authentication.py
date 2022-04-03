@@ -16,27 +16,32 @@ def open_connection():
     return conn
 
 # Authentication
-
-def auth (user_api_key, user_email, user_password):
+def login (user_email, user_password):
     conn = open_connection()
     with conn.cursor() as cursor:
-        user_exists = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_email = ?', user_email)
-        # Return a 404 if user not in database
+        user_exists = cursor.execute ('SELECT user_md5_pass FROM cloudcomputingtask.tbl_users WHERE user_email = ?', user_email)
         if user_exists == 0:
-            return 404
+            session_key = "401, Incorrect email provided"
 
         else:
-
-            # Authenticate via API Key if provided
-            if user_api_key != 0:
-                cursor.execute ('SELECT user_api_key FROM cloudcomputingtask.tbl_users WHERE user_email = ?', user_email)
-                key = cursor.fetchall()
-                isAuthorized = True if key == user_api_key else False
-
-            # Authenticate via user password if provided
-            if user_password != 0:
-                cursor.execute ('SELECT user_md5_pass FROM cloudcomputingtask.tbl_users WHERE user_email = ?', user_email)
-                md5Pass_db = cursor.fetchall()
-                isAuthorized = True if md5Pass_db == hashlib.md5(user_password.encode('utf-8')) else False
+            md5Pass_db = str(cursor.fetchall())
+            if md5Pass_db == hashlib.md5(user_password.encode('utf-8')):
+                session_key = hashlib.md5(secrets.token_urlsafe(10).encode('utf-8'))
+                cursor.execute('INSERT INTO cloudcomputingtask.tbl_users (user_api_key) VALUES(%s)', (session_key))
+            else:
+                session_key = "401, Incorrect password"
     conn.close()
-    return isAuthorized
+    return session_key
+
+
+
+def auth (user_api_key):
+    conn = open_connection()
+    with conn.cursor() as cursor:
+        user_exists = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_api_key = ?', user_api_key)
+    conn.close()
+    if user_exists == 0:
+        return False
+
+    else:
+        return True
