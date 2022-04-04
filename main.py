@@ -7,6 +7,8 @@ app = Flask(__name__)
 
 '''TASKS TABLE'''
 
+
+## Done
 # Defining the login
 @app.route('/login', methods=['POST'])
 def user_login():
@@ -24,8 +26,7 @@ def user_auth():
     return jsonify(isAuthorized)
 
 
-
-# READ all tasks
+## Done
 @app.route('/test', methods=['POST'])
 def test():
     #This function will need an api_key to return
@@ -44,7 +45,8 @@ def tasks():
     else:
         return 'error', 404
 
-
+## Done
+# View all tasks
 @app.route('/view/tasks', methods=['POST'])
 def view_tasks():
     # Authentication via key/db_password
@@ -52,7 +54,7 @@ def view_tasks():
     isAuthorized = auth (request_json['user_api_key'])
 
     if isAuthorized == False:
-        return jsonify("401 Unauthorized: You don't have permission to view this resouce")
+        return jsonify("Unauthorized: You don't have permission to view this resouce"), 401
 
     # Creating a new task in the database
     if isAuthorized == True:
@@ -64,15 +66,16 @@ def view_tasks():
         else:
             return jsonify("Your request body is missing parameters. Required parameters are Username."), 400
 
-
-@app.route('/view/tasks/<task_id>', methods=['POST'])
+## Done
+# View a single task defined by the ID
+@app.route('/view/task/<task_id>', methods=['POST'])
 def view_task(task_id):
     # Authentication via key/db_password
     request_json = request.get_json()
     isAuthorized = auth (request_json['user_api_key'])
 
     if isAuthorized == False:
-        return jsonify("401 Unauthorized: You don't have permission to view this resouce")
+        return jsonify("Unauthorized: You don't have permission to view this resouce"), 401
 
     # Creating a new task in the database
     if isAuthorized == True:
@@ -84,15 +87,16 @@ def view_task(task_id):
             return jsonify("Your request body is missing parameters. Required parameters are Username."), 400
 
 
-
-@app.route('/create/tasks', methods=['POST'])
+## Done
+# create a single task
+@app.route('/create/task', methods=['POST'])
 def create_tasks():
     # Authentication via key/db_password
     request_json = request.get_json()
     isAuthorized = auth (request_json['user_api_key'])
 
     if isAuthorized == False:
-        return jsonify("401 Unauthorized: You don't have permission to view this resouce")
+        return jsonify("Unauthorized: You don't have permission to view this resouce"), 401
 
     # Creating a new task in the database
     if isAuthorized == True:
@@ -104,27 +108,51 @@ def create_tasks():
         else:
             return jsonify("Your request body is missing parameters. Required parameters are Username, Title, Description and Status"), 400
 
+## Done
+@app.route('/update/task/<task_id>', methods=['PUT'])
+def update_tasks (task_id):
 
-@app.route('/tasks/<taskid>', methods=['PUT'])
-def update_tasks (taskid):
-    isAuthorized = auth (request.get_json()['user_api_key'])
+    request_json = request.get_json()
+    isAuthorized = auth (request_json['user_api_key'])
+    title = desc = "None"
+    status = 5
+
     if isAuthorized == False:
-        return jsonify({"msg: Unauthorized: You don't have permission to perform this action"}), 401
+        return jsonify("Unauthorized: You don't have permission to view this resouce"), 401
 
     if isAuthorized:
-        update_user_tasks (request.get_json(), taskid)
-        return jsonify({"msg: Your task has been updated"}), 200
+        if all (k in request_json for k in ("username", "task_title")):
+            result = update_user_tasks (request_json['username'], request_json['task_title'], desc, status, task_id)
+            return result
+            #return jsonify("Your title has been updated"), 200
 
+        if all (k in request_json for k in ("username", "task_description")):
+            result = update_user_tasks (request_json['username'], title, request_json['task_description'], status, task_id)
+            return result
+            #return jsonify("Your description has been updated"), 200
 
-@app.route('/tasks/<taskid>', methods=['DELETE'])
+        if all (k in request_json for k in ("username", "task_status")):
+            result = update_user_tasks (request_json['username'], title, desc, request_json['task_status'], task_id)
+            return result
+            #return jsonify("Your status has been updated"), 200
+
+        else:
+            return jsonify("Your request body is missing parameters. Required parameters are Username. Optional parameters are Title, Description and Status"), 400
+
+## Done
+@app.route('/task/<taskid>', methods=['DELETE'])
 def delete_tasks (taskid):
-    isAuthorized = auth (request.get_json()['user_api_key'])
-    if isAuthorized == False:
-        return jsonify({"msg: Unauthorized: You don't have permission to perform this action"}), 200
 
-    if isAuthorized:
-        delete_user_tasks (request.get_json(), taskid)
-        return jsonify({"msg: Your task has been deleted"}), 401
+    request_json = request.get_json()
+    isAuthorized = auth (request_json['user_api_key'])
+
+    if isAuthorized == False:
+        return jsonify("Unauthorized: You don't have permission to view this resouce"), 401
+
+    # Creating a new task in the database
+    if isAuthorized == True:
+        delete_user_tasks (request_json["username"], taskid)
+        return jsonify("Your task has been deleted"), 200
 
 
 '''USERS TABLE'''
