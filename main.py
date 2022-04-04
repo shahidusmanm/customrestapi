@@ -181,14 +181,18 @@ def users():
         return 'error', 404
 
 # READ single user
-@app.route('/users/<name>', methods=['GET'])
-def user(name):
-    isAuthorized = auth (request.get_json()['user_api_key'])
-    if request.method == 'GET':
-        # You pass a http request with: first_name last_name
-        return get_user(name)
-    else:
-        return 'error', 404
+@app.route('/view/user/<name>', methods=['POST'])
+def view_user(name):
+    request_json = request.get_json()
+    isAuthorized = auth (request_json['user_api_key'])
+
+    if isAuthorized == False:
+        return jsonify("Unauthorized: You don't have permission to view this resouce"), 401
+
+    # Creating a new task in the database
+    if isAuthorized == True:
+        ### Your code
+
 
 # DELETE user
 @app.route('/delete/<userid>', methods=['DELETE'])
