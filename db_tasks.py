@@ -64,35 +64,34 @@ def create_user_tasks(username, title, description, status):
     return task_id
 
 # UPDATE function that updates all fields that have been specified in the POST request
-def update_user_tasks(request_body):
+def update_user_tasks(username, title, description, status, task_id):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
-        user_id = int(cursor.fetchall())
 
         # Check if task_title has been sent in the request body and update the database if it has
-        if "task_title" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_title = %s, task_updated_datetime = NOW() WHERE user_id = %s AND task_id = %s', (request_body['task_title'], user_id, request_body['task_id']))
+        if title != 'None':
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_title = %s, task_updated_datetime = NOW() WHERE username = %s AND task_id = %s', (title, username, task_id))
+            conn.commit()
 
         # Check if task_description has been sent in the request body and update the database if it has
-        if "task_description" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_description = %s, task_updated_datetime = NOW() WHERE user_id = %s AND task_id = %s', (request_body['task_description'], user_id, request_body['task_id']))
+        if description != "None":
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_description = %s, task_updated_datetime = NOW() WHERE username = %s AND task_id = %s', (description, username, task_id))
+            conn.commit()
 
         # Check if task_status has been sent in the request body and update the database if it has
-        if "task_status" in request_body:
-            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_status = %s, task_updated_datetime = NOW() WHERE user_id = %s AND task_id = %s', (request_body['task_status'], user_id, request_body['task_id']))
-        conn.commit()
-        conn.close()
-    return 0
+        if status != 5:
+            cursor.execute('UPDATE cloudcomputingtask.tbl_tasks SET task_status = %s, task_updated_datetime = NOW() WHERE username = %s AND task_id = %s', (status, username, task_id))
+            conn.commit()
+
+
+    conn.close()
+    return "Your task has been updated"
 
 # DELETE function that deletes an entire row (or task) from the database
-def delete_user_tasks(request_body, task_id):
+def delete_user_tasks(username, task_id):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('SELECT user_id FROM cloudcomputingtask.tbl_users WHERE user_email = %s', request_body['user_email'])
-        user_id = int(cursor.fetchall())
-
-        cursor.execute('DELETE FROM cloudcomputingtask.tbl_tasks WHERE user_id = %s AND task_id = %s', (user_id, task_id))
+        cursor.execute('DELETE FROM cloudcomputingtask.tbl_tasks WHERE username = %s AND task_id = %s', (username, task_id))
         conn.commit()
         conn.close()
-    return 0
+    return 1
