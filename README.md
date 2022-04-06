@@ -53,6 +53,7 @@ You will now have access to the following services specific to your account:
 **To Create a task**
 
 `<POST>` /create/task
+
 body parameters: 
 ```
 username, user_api_key, task_title, task_description
@@ -60,6 +61,7 @@ username, user_api_key, task_title, task_description
 **To Read all tasks**
 
 `<POST>` /view/tasks 
+
 body parameters: 
 ```
 username, user_api_key
@@ -68,6 +70,7 @@ username, user_api_key
 **To Read a task**
 
 `<POST>` /view/task/<task_id>
+
 body parameters: 
 ```
 username, user_api_key
@@ -76,6 +79,7 @@ username, user_api_key
 **To Update a task**
 
 `<PUT>` /update/task/<task_id>
+
 body parameters: 
 ```
 username, user_api_key, [task_title, task_description, task_status])
@@ -84,6 +88,7 @@ username, user_api_key, [task_title, task_description, task_status])
 **To Delete a task**
 
 `<DELETE>` /delete/task/<task_id> 
+
 body parameters:
 ```
 username, user_api_key
@@ -92,22 +97,29 @@ username, user_api_key
 **To Read all users**
 
 `<POST>` /view/users 
+
+body parameters: 
 ```
-body parameters: username, user_api_key
+username, user_api_key
 ```
 (permissions: admin only)
 
 **To Read a user**
 `<POST>` /view/user/<username>
+  
+body parameters:
 ```
-body parameters: username, user_api_key
+username, user_api_key
 ```
 (permissions: admin only)
   
 **To Delete a user**
+
 `<DELETE>` /delete/user/<username> 
+  
+parameters: 
 ```
-parameters: username, user_api_key) 
+username, user_api_key) 
 ```
 (permissions: admin only)
 
