@@ -6,10 +6,8 @@
 ## Table of Contents
 - [About](#about)
 - [System Architecture](#system-architecture)
-- [Backend](#backend)
-- [REST API] (#rest-api)
-- 
-  - 
+  - [REST API](#rest-api)
+
 
 
 ## About 
