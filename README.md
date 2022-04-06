@@ -1,7 +1,5 @@
 # Task Manager API
 
-
-
 ## Table of Contents
 - [About](#about)
 - [System Architecture](#system-architecture)
@@ -28,7 +26,7 @@ Use the following URL API path:
 
 ## To create an account:
 
-<POST> /create/user
+`<POST>` /create/user
   
 ```
 JSON body:
