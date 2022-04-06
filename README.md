@@ -74,6 +74,7 @@ username, user_api_key
 ```
 
 **To Update a task**
+
 `<PUT>` /update/task/<task_id>
 body parameters: 
 ```
@@ -87,6 +88,7 @@ body parameters:
 ```
 username, user_api_key
 ```
+
 **To Read all users**
 
 `<POST>` /view/users 
@@ -101,9 +103,13 @@ body parameters: username, user_api_key
 body parameters: username, user_api_key
 ```
 (permissions: admin only)
-
+  
 **To Delete a user**
-`<DELETE>` /delete/user/<username> (parameters: username, user_api_key) (permissions: admin only)
+`<DELETE>` /delete/user/<username> 
+```
+parameters: username, user_api_key) 
+```
+(permissions: admin only)
 
 If any confusion arises, please inspect and follow the guidance in the error messages returned by the REST API.
 
