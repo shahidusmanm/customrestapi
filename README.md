@@ -1,4 +1,3 @@
-# customrestapi
 # Task Manager API
 
 
@@ -27,9 +26,9 @@ The technology stack used to create this API includes a Cloud SQL database (GCP)
 
 Use the following URL API path:
 
-To create an account:
+## To create an account:
 
-## <POST> /create/user
+<POST> /create/user
   
 ```
 JSON body:
@@ -39,7 +38,20 @@ JSON body:
 "user_password": "password123", 
 "user_email": "john.smith@gmail.com"}
 ```
-  
+
+## To log in:
+
+<POST> /login
+
+```
+JSON body:
+{"user_email": "john.smith@gmail.com",
+"user_password": "password123"}
+```
+
+This will return a private key (e.g. “72763aed849210fg93gh39210d”) that you must include in the body of all requests to verify your access to resources.
+
+
   
 
 
