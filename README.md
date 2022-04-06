@@ -36,6 +36,7 @@ JSON body:
 "user_email": "john.smith@gmail.com"}
 ```
 **To log in:**
+
 `<POST>` /login
 
 JSON body:
@@ -48,20 +49,23 @@ This will return a private key (e.g. “72763aed849210fg93gh39210d”) that you 
 
 You will now have access to the following services specific to your account:
 
-To Create a task
+**To Create a task**
+
 `<POST>` /create/task
 body parameters: 
 ```
 username, user_api_key, task_title, task_description
 ```
-## To Read all tasks
+**To Read all tasks**
+
 `<POST>` /view/tasks 
 body parameters: 
 ```
 username, user_api_key
 ```
 
-# To Read a task
+**To Read a task**
+
 `<POST>` /view/task/<task_id>
 body parameters: 
 ```
