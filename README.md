@@ -1,4 +1,29 @@
 # customrestapi
+### Task Manager API
+
+
+
+
+
+
+# REST API 
+This REST API serves as a simple way to create and manage tasks across teams of users. It facilitates the creation, reading, updating and deletion of tasks and users with hash-based authentication and admin permissions.
+
+The technology stack used to create this API includes a Cloud SQL database (GCP), Python and Docker.
+
+Use the following URL API path:
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
