@@ -28,8 +28,8 @@ Use the following URL API path:
 
 `<POST>` /create/user
   
-```
 JSON body:
+```
 {"user_fname": "John", 
 "user_lname": "Smith", 
 "username": "Jonno", 
@@ -38,7 +38,6 @@ JSON body:
 ```
 
 ## To log in:
-
 `<POST>` /login
 
 JSON body:
@@ -51,14 +50,25 @@ This will return a private key (e.g. “72763aed849210fg93gh39210d”) that you 
 
 You will now have access to the following services specific to your account:
 
-To Create a task
-<POST> /create/task (body parameters: username, user_api_key, task_title, task_description)
+### To Create a task
+`<POST>` /create/task
+body parameters: 
+```
+username, user_api_key, task_title, task_description
+```
+## To Read all tasks
+`<POST>` /view/tasks 
+body parameters: 
+```
+username, user_api_key
+```
 
-To Read all tasks
-<POST> /view/tasks (body parameters: username, user_api_key)
-
-To Read a task
-<POST> /view/task/<task_id> (body parameters: username, user_api_key)
+# To Read a task
+`<POST>` /view/task/<task_id>
+body parameters: 
+```
+username, user_api_key
+```
 
 To Update a task
 <PUT> /update/task/<task_id> (body parameters: username, user_api_key, [task_title, task_description, task_status])
