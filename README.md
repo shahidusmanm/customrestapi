@@ -4,6 +4,9 @@
 - [About](#about)
 - [System Architecture](#system-architecture)
   - [REST API](#rest-api)
+   - [To create an account](#to-create-an-account)
+   - [To log in](#to-log-in)
+
 
 
 
@@ -24,7 +27,7 @@ The technology stack used to create this API includes a Cloud SQL database (GCP)
 
 Use the following URL API path:
 
-**To create an account:**
+## To create an account:
 
 `<POST>` /create/user
   
@@ -36,7 +39,7 @@ JSON body:
 "user_password": "password123", 
 "user_email": "john.smith@gmail.com"}
 ```
-**To log in:**
+## To log in:
 
 `<POST>` /login
 
