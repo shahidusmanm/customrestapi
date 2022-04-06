@@ -5,26 +5,30 @@ import secrets
 import random
 import hashlib
 
+# initialising database details
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
 db_password = os.environ.get('CLOUD_SQL_PASSWORD')
 db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
-#Tasks CRUD
-
+# function to allow for connection to the SQL database
 def open_connection():
     unix_socket = '/cloudsql/{}'.format(db_connection_name)
     conn = pymysql.connect(user="cloudcomputing", password="cloudcomputing", db=db_name, host='35.246.95.43', cursorclass=pymysql.cursors.DictCursor)
     return conn
 
+'''Tasks CRUD'''
 
-def test_db_function(email):
+# CREATE function to create task
+def create_user_tasks(username, title, description):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('SELECT username FROM cloudcomputingtask.tbl_users WHERE user_email = %s', email)
-        username = cursor.fetchall()
+        task_id = random.getrandbits(16)
+        cursor.execute('INSERT INTO cloudcomputingtask.tbl_tasks (user_api_key, task_id, username, task_title, task_description, task_created_datetime, task_updated_datetime) VALUES(%s, %s,%s, %s, %s, NOW(), NOW())',
+        ("00000",task_id, username, title, description))
+    conn.commit()
     conn.close()
-    return jsonify(username)
+    return task_id
 
 # READ function to see user tasks
 def get_user_tasks(username, task_id):
@@ -52,16 +56,6 @@ def get_user_tasks(username, task_id):
     conn.close()
     return answer
 
-
-def create_user_tasks(username, title, description, status):
-    conn = open_connection()
-    with conn.cursor() as cursor:
-        task_id = random.getrandbits(16)
-        cursor.execute('INSERT INTO cloudcomputingtask.tbl_tasks (user_api_key, task_id, username, task_title, task_description, task_status, task_created_datetime, task_updated_datetime) VALUES(%s, %s,%s, %s, %s, %s, NOW(), NOW())',
-        ("00000",task_id, username, title, description, status))
-    conn.commit()
-    conn.close()
-    return task_id
 
 # UPDATE function that updates all fields that have been specified in the POST request
 def update_user_tasks(username, title, description, status, task_id):
