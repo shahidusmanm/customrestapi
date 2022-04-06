@@ -39,10 +39,10 @@ JSON body:
 
 ## To log in:
 
-<POST> /login
+`<POST>` /login
 
-```
 JSON body:
+```
 {"user_email": "john.smith@gmail.com",
 "user_password": "password123"}
 ```
@@ -65,9 +65,9 @@ To Update a task
 
 To Delete a task
 `<DELETE>` /delete/task/<task_id> 
-```
 body parameters:
-  username, user_api_key
+```
+username, user_api_key
 ```
 To Read all users
 <POST> /view/users (body parameters: username, user_api_key) (permissions: admin only)
