@@ -64,9 +64,10 @@ To Update a task
 <PUT> /update/task/<task_id> (body parameters: username, user_api_key, [task_title, task_description, task_status])
 
 To Delete a task
-'<DELETE>' /delete/task/<task_id> 
+`<DELETE>` /delete/task/<task_id> 
 ```
-body parameters: username, user_api_key
+body parameters:
+  username, user_api_key
 ```
 To Read all users
 <POST> /view/users (body parameters: username, user_api_key) (permissions: admin only)
