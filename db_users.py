@@ -12,7 +12,7 @@ db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 # function to allow for connection to the SQL database
 def open_connection():
     unix_socket = '/cloudsql/{}'.format(db_connection_name)
-    conn = pymysql.connect(user=db_user, password=db_password, db=db_name, host='35.246.95.43', cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(user="cloudcomputing", password="cloudcomputing", db=db_name, host='35.246.95.43', cursorclass=pymysql.cursors.DictCursor)
     return conn
 
 '''Users CRUD'''
