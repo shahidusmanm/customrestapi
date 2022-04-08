@@ -197,26 +197,24 @@ You can actually go to your cloud Google console.  Let us go to our console.
 cloud.google.com
 ``` 
  
-And from our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google
+From our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google
   
 ![Artifact Registry](images/artifact-registry.png)  
   
-We can see there's a flask app repository already available here and it is in. 
+We can see there's a flask app repository already available here. 
   
 ![FlaskApp](images/Flaskapp.png) 
   
-It is in a Docker format and it is deployed in Europe-West2, which is their London based data center.
-  
-You can open it.  
+It is in a Docker format and it is deployed in Europe-West2, which is their London based data center so you click on it.  
   
 ![Cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
 
-You can see that we just pushed in cloudflaskappdeployment_gcp so open it. 
+You can see that we just pushed in cloudflaskappdeployment_gcp so click on it. 
   
 ![cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
   
 You can see that there's a the container there, just deployed V5. 
-It's stacked as version five, so you know it was created one minute ago, and now you can go to cloud down and import, this can go to cloud run.
+It's stacked as version five, so you know it was created one minute ago, and now we can go to cloud down and import, this can go to cloud run.
   
 ![Cloud Run](images/cloud-run2.png) 
 
@@ -224,27 +222,23 @@ If you want to create a new service, you can go to create a service.
   
 ![Create Service](images/create-service.png) 
   
-I need to show or tell it where to get the container from so I'm gonna click on select. 
-My containers was stored in the artifact industry, so I'm going to go here. 
+We need to show or tell you where to get the container from so we are going to click on select it.  My containers was stored in the artifact industry, so we are going to go here. 
 
 ![FlaskApp](images/container-image-URL2.png) 
 
-This is the repository I want to upload. 
+This is the repository we want to upload. 
 
 ![Select Container](images/select-container.png) 
 
-This is the repository I want to upload so Select this. 
-I want to deploy this in London, so I'm gonna go and select.
+This is the repository we want to upload so select this.  We want to deploy this in London, so we are gonna go and select this
   
 ![Region](images/region.png) 
 
-You only want the CPU to be allocated during request processing. 
-You don't want the CPU to be always be allocated because it's gonna cost you more. You want to disable Autoscaling so you just want to have one instance, minimum one instance maximum. 
+You only want the CPU to be allocated during request processing.  You don't want the CPU to be always be allocated because it's going to cost you more. You want to disable Autoscaling so you just want to have one instance minimum and maximum. 
 
 ![CPU Allocation](images/cpu-allocation.png)   
   
-I want to allow all traffic because this container should be accessible from everywhere. 
-I don't want to have any. 
+We want to allow all traffic because this container should be accessible from everywhere.  We don't want to have any. 
   
 ![Ingress](images/ingress.png)
   
@@ -252,21 +246,21 @@ Google's authentication systems you are going to allow all unauthenticated notif
   
 ![Authentication](images/authenthication.png)
 
-And then I need to go and change a few more changes here. I need to change this container board to 5000 because this is a class camp. Last lessons to 5000, so I need to tell my container that any request you get on port 80 needs to be forwarded to port 5000. 
+A few more changes to make here.  We need to change this container board to 5000 because this is a class camp, so you need to tell our container that any request you get on port 80 needs to be forwarded to port 5000. 
 
 ![Container Port](images/container-port.png)
 
-I'm going to reduce the memory capacity because I don't need 512MB.  I'm gonna skip one CPU. 
+We are going to reduce the memory capacity because we don't need 512MB and we are going to skip CPU to one. 
 
 ![Capacity](images/capacity.png)
   
-And I'm going to leave everything as default just and then go and create my container. 
+We are going to leave everything as default and then go and create our container. 
   
-So contain creating the container takes a bit of time, but now that it's done I have the the URL. 
+Creating the container takes a bit of time, but now that it is done we have the URL. 
 
 ![Container URL](images/container-URL2.png)
   
-Here you can just copy it and then use it on any postman application I have and then it's going to work with mine and that's how we went ahead and created our or deployed our task app on to Google's cloud platform. 
+Here you can just copy the URL and use it on any postman application we have and then it is going to work with mine and that's how we went ahead and created our or deployed our task app on to Google's cloud platform. 
   
 ![Postman](images/postman.png)
   
