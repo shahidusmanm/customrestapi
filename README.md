@@ -141,8 +141,8 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 #### -----------------------------------------------------------------------
 
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)  
+![GitHub Logo](/images/flaskapp.png)
+Format: ![Alt Text](url)
   
   
 <br><br>
