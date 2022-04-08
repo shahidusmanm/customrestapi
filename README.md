@@ -141,9 +141,7 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 #### -----------------------------------------------------------------------
 
-![GitHub Logo](/images/flaskapp.png)
-Format: ![Alt Text](url)
-  
+![FlaskApp](/images/flaskapp.png)  
   
 <br><br>
 ## Creating the Docker Image
