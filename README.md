@@ -302,9 +302,6 @@ Here you can just copy the URL and use it on any postman application we have and
 ![Postman](images/postman.png)
   
   
-#### -----------------------------------------------------------------------
-  
-  
 
   
 
