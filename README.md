@@ -197,8 +197,11 @@ You can actually go to your cloud Google console.  Let us go to our console.
 cloud.google.com
 ``` 
  
-And from our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google so we can see there's a flask app repository already available here and it is in. 
-
+And from our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google
+  
+![FlaskApp](images/artifact-registry.png)  
+  
+We can see there's a flask app repository already available here and it is in. 
   
 ![FlaskApp](images/Flaskapp.png) 
   
