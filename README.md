@@ -112,6 +112,7 @@ username, user_api_key
 (permissions: admin only)
 
 **To Read a user**
+
 `<POST>` /view/user/<username>
   
 body parameters:
@@ -119,9 +120,9 @@ body parameters:
 username, user_api_key
 ```
 (permissions: admin only)
-  
-**To Delete a user**
 
+**To Delete a user**
+  
 `<DELETE>` /delete/user/<username> 
   
 parameters: 
