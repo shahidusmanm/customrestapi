@@ -267,7 +267,7 @@ And I'm going to leave everything as default just and then go and create my cont
   
 So contain creating the container takes a bit of time, but now that it's done I have the the URL. 
 
-![Container URL](images/container-URL.png)
+![Container URL](images/container-URL2.png)
   
 Here you can just copy it and then use it on any postman application I have and then it's going to work with mine and that's how we went ahead and created our or deployed our task app on to Google's cloud platform. 
   
