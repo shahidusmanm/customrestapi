@@ -210,9 +210,24 @@ We can see there's a flask app repository already available here and it is in.
   
 It is in a Docker format and it is deployed in Europe-West2, which is their London based data center.
   
+You can open it.  
   
+![FlaskApp](images/cloudflaskappdeployment_gcp.png) 
+
+You can see that we just pushed in cloudflaskappdeployment_gcp so open it. 
   
+![FlaskApp](images/cloudflaskappdeployment_gcp.png) 
   
+You can see that there's a the container there, just deployed V5. 
+It's stacked as version five, so you know it was created one minute ago, and now you can go to cloud down and import, this can go to cloud run.
+  
+![FlaskApp](images/cloud-run.png) 
+
+If you want to create a new service, you can go to create a service.
+  
+![FlaskApp](images/create-service.png) 
+  
+
   
   
   
