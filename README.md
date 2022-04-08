@@ -3,14 +3,12 @@
 ## Table of Contents
 - [About](#about)
 - [System Architecture](#system-architecture)
+  - [Database Setup](#database-setup)
   - [REST API](#rest-api)
     - [To create an account](#to-create-an-account)
     - [To log in](#to-log-in)
-    - [CRUD functions](#CRUD-functions)
+    - [CRUD functions](#crud-functions)
   - [Creating a Docker Image](#Creating-a-Docker-Image)
-
-
-
 
 
 
@@ -24,6 +22,60 @@
 
 
 
+## Database Setup 
+We used the following commands to create the database in GCP:
+
+```
+CREATE TABLE tbl_users ( 
+username VARCHAR(255) NOT NULL, 
+user_fname VARCHAR(255) DEFAULT NULL, 
+user_lname VARCHAR(255) DEFAULT NULL, 
+user_email VARCHAR(255) DEFAULT NULL, 
+user_md5_pass VARCHAR(255) DEFAULT NULL, 
+user_api_key VARCHAR(255) DEFAULT NULL, 
+user_created_datetime datetime DEFAULT NULL,
+PRIMARY KEY(username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE tbl_tasks ( 
+task_id INT NOT NULL AUTO_INCREMENT,
+username VARCHAR(255) DEFAULT NULL, 
+user_api_key VARCHAR(255) NOT NULL, 
+task_title VARCHAR(255) DEFAULT NULL, 
+task_description TEXT DEFAULT NULL, 
+task_status INT NOT NULL DEFAULT 0, 
+task_created_datetime datetime NOT NULL, 
+task_updated_datetime datetime NOT NULL,
+PRIMARY KEY(task_id),
+FOREIGN KEY(username) REFERENCES tbl_users(username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; 
+```
+We created some dummy data to initially add to the database so we could test the GET commands:
+
+```
+INSERT INTO tbl_users (username, user_fname, user_lname, user_email, user_md5_pass, user_api_key, user_created_datetime) VALUES ('john.test','john', 'test', 'john_test@email.com', '81dc9bdb52d04dc20036dbd8313ed055', 'pWJn2HDoN4', NOW()); 
+
+
+INSERT INTO tbl_tasks (username, user_api_key, task_title, task_description, task_created_datetime, task_updated_datetime) 
+VALUES ('ghop','pWJn2HDoN4','Complete Cloud Computing CW','Got to do big things!',NOW(),NOW());
+
+INSERT INTO tbl_tasks (user_id, user_api_key, task_title, task_description, task_status, task_created_datetime, task_updated_datetime) 
+VALUES (2,'pWJn2HDoN4','Create our Project Video','Got to do big things!',0,NOW(),NOW());
+```
+
+Finally using the GCP UI we were able to configure the database and setup the connection details:
+
+```
+#app.yaml
+runtime: python37
+
+env_variables:
+  CLOUD_SQL_USERNAME: root
+  CLOUD_SQL_PASSWORD: cloudcomputingtasks
+  CLOUD_SQL_DATABASE_NAME: cloudcomputingtask
+  CLOUD_SQL_CONNECTION_NAME: cloudcomputingcw-343618:europe-west2:cloudcomputingtasks
+```
 
 ## REST API 
 This REST API serves as a simple way to create and manage tasks across teams of users. It facilitates the creation, reading, updating and deletion of tasks and users with hash-based authentication and admin permissions.
