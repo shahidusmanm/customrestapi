@@ -147,16 +147,22 @@ If any confusion arises, please inspect and follow the guidance in the error mes
   <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" height="40" />
 </p>
 
-I'm gonna be walking us through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
+We are gonna be walking us through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
 
 The first thing we did was we created a Docker file. 
 
 This Docker file is very basic. 
-  
  
+There's nothing new and once this file is created we actually went ahead and built our container. 
 
-  
-  
+```
+FROM python:3.7-alpine
+WORKDIR /dockerimage
+COPY . /dockerimage
+RUN pip install -r requirements.txt
+EXPOSE 80
+CMD ["python", "main.py"]
+``` 
   
   
   
