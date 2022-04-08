@@ -1,49 +1,273 @@
-# customrestapi
+# Task Manager API
+
+## Table of Contents
+- [About](#about)
+- [System Architecture](#system-architecture)
+  - [REST API](#rest-api)
+    - [To create an account](#to-create-an-account)
+    - [To log in](#to-log-in)
+  - [Creating a Docker Image](#Creating-a-Docker-Image)
 
 
 
 
+
+
+
+## About 
+
+
+
+## System Architecture
+
+
+
+
+
+## REST API 
+This REST API serves as a simple way to create and manage tasks across teams of users. It facilitates the creation, reading, updating and deletion of tasks and users with hash-based authentication and admin permissions.
+
+The technology stack used to create this API includes a Cloud SQL database (GCP), Python and Docker.
+
+Use the following URL API path:
+
+## To create an account:
+
+`<POST>` /create/user
+  
+JSON body:
+```
+{"user_fname": "John", 
+"user_lname": "Smith", 
+"username": "Jonno", 
+"user_password": "password123", 
+"user_email": "john.smith@gmail.com"}
+```
+## To log in:
+
+`<POST>` /login
+
+JSON body:
+```
+{"user_email": "john.smith@gmail.com",
+"user_password": "password123"}
+```
+
+This will return a private key (e.g. “72763aed849210fg93gh39210d”) that you must include in the body of all requests to verify your access to resources.
+
+You will now have access to the following services specific to your account:
+
+**To Create a task**
+
+`<POST>` /create/task
+
+body parameters: 
+```
+username, user_api_key, task_title, task_description
+```
+**To Read all tasks**
+
+`<POST>` /view/tasks 
+
+body parameters: 
+```
+username, user_api_key
+```
+
+**To Read a task**
+
+`<POST>` /view/task/<task_id>
+
+body parameters: 
+```
+username, user_api_key
+```
+
+**To Update a task**
+
+`<PUT>` /update/task/<task_id>
+
+body parameters: 
+```
+username, user_api_key, [task_title, task_description, task_status])
+```
+
+**To Delete a task**
+
+`<DELETE>` /delete/task/<task_id> 
+
+body parameters:
+```
+username, user_api_key
+```
+
+**To Read all users**
+
+`<POST>` /view/users 
+
+body parameters: 
+```
+username, user_api_key
+```
+(permissions: admin only)
+
+**To Read a user**
+
+`<POST>` /view/user/<username>
+  
+body parameters:
+```
+username, user_api_key
+```
+(permissions: admin only)
+
+**To Delete a user**
+  
+`<DELETE>` /delete/user/<username> 
+  
+parameters: 
+```
+username, user_api_key) 
+```
+(permissions: admin only)
+
+If any confusion arises, please inspect and follow the guidance in the error messages returned by the REST API.
+
+
+
+
+
+
+
+
+
+
+
+
+#### -----------------------------------------------------------------------
 
 <br><br>
-##### Creating the Docker Image
-<p align="left">
-  <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" height="40" />
-</p>
-Create our docker image with the "Dockerfile" from our repository by:
+## Creating the Docker Image
+  
+![FlaskApp](images/docker-file.png)   
+
+We are going to walk through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
+
+The first thing we did was we created a Docker file.  This Docker file is very basic. 
+ 
+There's nothing new and once this file is created we actually went ahead and built our container. 
 
 ```
-docker build -t gcr.io/${USER_ID}/tasks:v1 .
-```
+FROM python:3.7-alpine
+WORKDIR /dockerimage
+COPY . /dockerimage
+RUN pip install -r requirements.txt
+EXPOSE 80
+CMD ["python", "main.py"]
+``` 
+  
+So to do that we used the Docker build command prompt, type below With a specific name 
 
-List your Docker images to verify.
-```
-docker images
-```
+``` 
+docker build . --tag-europe-west2-docker.pkg.dev/
+``` 
 
+So this needs to be in a specific name because once you've built this image, you want to push it to Google's artifact registry directly using Docker push. To do that you need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of our artifact registry, which is europe-west2-docker.pkg.dev. 
 
+Then it needs to have the the project name for our project in our Google account, it's going to be cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5, with the version name to version 5 as we have already uploaded versions 123 and 4.
+  
+``` 
+docker build . --tag-europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5
+``` 
+And we're going run this and it's gonna take a couple of seconds to run and create our image file. 
 
+Once the image file is created, we can just go and push it onto our artifact registry on Google.  For that we need to use the Docker push command followed by the name of the registry, the name of the registry and repository where we want to push our container. 
+  
+It's gonna be:
 
-#### Docker Container
-<p align="left">
-  <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" height="75" />
-</p>
+``` 
+docker push europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5  
+```   
+  
+So the thing to note here is that there's been no change between versions 3-4 and 5 that we have uploaded, so this container already exists, so it you know it just retagged and it didn't put it again. 
+  
+You can actually go to your cloud Google console.  Let us go to our console. 
 
-1. Install [Docker](https://docs.docker.com/get-docker/) and verify your installation with ``` docker -v ```
-2. Launch the terminal in the library_api folder or direct to this directory.
-3. Build the docker image (be sure to include the ". " at the end and to define your username ``` whoami```)
+``` 
+cloud.google.com
+``` 
+ 
+From our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google
+  
+![Artifact Registry](images/artifact-registry.png)  
+  
+We can see there's a flask app repository already available here. 
+  
+![FlaskApp](images/Flaskapp.png) 
+  
+It is in a Docker format and it is deployed in Europe-West2, which is their London based data center so you click on it.  
+  
+![Cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
 
-```
-docker build -t <your username>/tasks . 
-```
+You can see that we just pushed in cloudflaskappdeployment_gcp so click on it. 
+  
+![cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
+  
+You can see that there's a the container there, just deployed V5. 
+It's stacked as version five, so you know it was created one minute ago, and now we can go to cloud down and import, this can go to cloud run.
+  
+![Cloud Run](images/cloud-run2.png) 
 
-4. Run your container:
-```
-docker run -it -p 5000:5000 <your username>/tasks 
-```
+If you want to create a new service, you can go to create a service.
+  
+![Create Service](images/create-service.png) 
+  
+We need to show or tell you where to get the container from so we are going to click on select it.  My containers was stored in the artifact industry, so we are going to go here. 
 
-This will map port 5000 to the host 5000 in our container. 
+![FlaskApp](images/container-image-URL2.png) 
 
-5. Access the backend from your browser via ``http://localhost:5000``
+This is the repository we want to upload. 
 
-More info: [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/) 
+![Select Container](images/select-container.png) 
+
+This is the repository we want to upload so select this.  We want to deploy this in London, so we are gonna go and select this
+  
+![Region](images/region.png) 
+
+You only want the CPU to be allocated during request processing.  You don't want the CPU to be always be allocated because it's going to cost you more. You want to disable Autoscaling so you just want to have one instance minimum and maximum. 
+
+![CPU Allocation](images/cpu-allocation.png)   
+  
+We want to allow all traffic because this container should be accessible from everywhere.  We don't want to have any. 
+  
+![Ingress](images/ingress.png)
+  
+Google's authentication systems you are going to allow all unauthenticated notifications as well.  
+  
+![Authentication](images/authenthication.png)
+
+A few more changes to make here.  We need to change this container board to 5000 because this is a class camp, so you need to tell our container that any request you get on port 80 needs to be forwarded to port 5000. 
+
+![Container Port](images/container-port.png)
+
+We are going to reduce the memory capacity because we don't need 512MB and we are going to skip CPU to one. 
+
+![Capacity](images/capacity.png)
+  
+We are going to leave everything as default and then go and create our container. 
+  
+Creating the container takes a bit of time, but now that it is done we have the URL. 
+
+![Container URL](images/container-URL2.png)
+  
+Here you can just copy the URL and use it on any postman application we have and then it is going to work with mine and that's how we went ahead and created our or deployed our task app on to Google's cloud platform. 
+  
+![Postman](images/postman.png)
+  
+  
+#### -----------------------------------------------------------------------
+  
+  
+
+  
 
