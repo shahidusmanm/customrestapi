@@ -6,6 +6,7 @@
   - [REST API](#rest-api)
     - [To create an account](#to-create-an-account)
     - [To log in](#to-log-in)
+    - [CRUD functions](#CRUD-functions)
   - [Creating a Docker Image](#Creating-a-Docker-Image)
 
 
@@ -56,6 +57,8 @@ JSON body:
 This will return a private key (e.g. “72763aed849210fg93gh39210d”) that you must include in the body of all requests to verify your access to resources.
 
 You will now have access to the following services specific to your account:
+
+## CRUD functions:
 
 **To Create a task**
 
