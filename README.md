@@ -202,7 +202,7 @@ cloud.google.com
  
 And from our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google
   
-![FlaskApp](images/artifact-registry.png)  
+![Artifact Registry](images/artifact-registry.png)  
   
 We can see there's a flask app repository already available here and it is in. 
   
@@ -212,22 +212,29 @@ It is in a Docker format and it is deployed in Europe-West2, which is their Lond
   
 You can open it.  
   
-![FlaskApp](images/cloudflaskappdeployment_gcp.png) 
+![Cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
 
 You can see that we just pushed in cloudflaskappdeployment_gcp so open it. 
   
-![FlaskApp](images/cloudflaskappdeployment_gcp.png) 
+![cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
   
 You can see that there's a the container there, just deployed V5. 
 It's stacked as version five, so you know it was created one minute ago, and now you can go to cloud down and import, this can go to cloud run.
   
-![FlaskApp](images/cloud-run.png) 
+![Cloud Run](images/cloud-run.png) 
 
 If you want to create a new service, you can go to create a service.
   
-![FlaskApp](images/create-service.png) 
+![Create Service](images/create-service.png) 
   
+I need to show or tell it where to get the container from so I'm gonna click on select. 
+My containers was stored in the artifact industry, so I'm going to go here. 
 
+![FlaskApp](images/container-image-URL.png) 
+
+This is the repository I want to upload. 
+
+![FlaskApp](images/select-container-image.png) 
   
   
   
