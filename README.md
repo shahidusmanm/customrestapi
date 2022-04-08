@@ -151,11 +151,9 @@ If any confusion arises, please inspect and follow the guidance in the error mes
   
 ![FlaskApp](images/docker-file.png)   
 
-We are gonna be walking us through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
+We are going to walk through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
 
-The first thing we did was we created a Docker file. 
-
-This Docker file is very basic. 
+The first thing we did was we created a Docker file.  This Docker file is very basic. 
  
 There's nothing new and once this file is created we actually went ahead and built our container. 
 
@@ -168,32 +166,30 @@ EXPOSE 80
 CMD ["python", "main.py"]
 ``` 
   
-So to do that we used the Docker build command prompt, write it right, OK, tag it. With a specific name. Press 2 dash docker. 
+So to do that we used the Docker build command prompt, type below With a specific name 
 
 ``` 
 docker build . --tag-europe-west2-docker.pkg.dev/
 ``` 
 
-So this needs to be the stack needs to be in a specific name because I want to. Once I've built this image, I want to push it to Google's artifact registry directly using Docker push. To do that I need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of my artifact registry, which is europe-west2-docker.pkg.dev. 
-  
+So this needs to be in a specific name because once you've built this image, you want to push it to Google's artifact registry directly using Docker push. To do that you need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of our artifact registry, which is europe-west2-docker.pkg.dev. 
 
-Then it needs to have the the project name for our project in our Google account, it's going to be cloud computing Flask app. deployment under score, GCP, and we are gonna tag it with the version name. So I've already uploaded versions 123 and four so I'm gonna push this as the version 5.
+Then it needs to have the the project name for our project in our Google account, it's going to be cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5, with the version name to version 5 as we have already uploaded versions 123 and 4.
   
 ``` 
 docker build . --tag-europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5
 ``` 
 And we're going run this and it's gonna take a couple of seconds to run and create our image file. 
 
-Once the image file is created, we can just go and push it onto our artifact registry on Google.  For that we need to use the Docker push command followed by the name of the registry, the name of the registry and repository where I want to push our container. 
+Once the image file is created, we can just go and push it onto our artifact registry on Google.  For that we need to use the Docker push command followed by the name of the registry, the name of the registry and repository where we want to push our container. 
   
-
 It's gonna be:
 
 ``` 
 docker push europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5  
 ```   
   
-So the thing to note here is that there's been no change between versions 3-4 and five that I've uploaded, so it said that this this file, or this container already exists, so it you know it just retagged. It didn't put it again. 
+So the thing to note here is that there's been no change between versions 3-4 and 5 that we have uploaded, so this container already exists, so it you know it just retagged and it didn't put it again. 
   
 You can actually go to your cloud Google console.  Let us go to our console. 
 
