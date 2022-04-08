@@ -147,9 +147,8 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 <br><br>
 ## Creating the Docker Image
-<p align="left">
-  <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" height="40" />
-</p>
+  
+![FlaskApp](images/docker-file.png)   
 
 We are gonna be walking us through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
 
