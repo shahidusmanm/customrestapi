@@ -234,30 +234,30 @@ My containers was stored in the artifact industry, so I'm going to go here.
 
 This is the repository I want to upload. 
 
-![FlaskApp](images/select-container-image.png) 
+![Select Container](images/select-container.png) 
 
 This is the repository I want to upload so Select this. 
 I want to deploy this in London, so I'm gonna go and select.
   
-![FlaskApp](images/region-image.png) 
+![Region](images/region.png) 
 
 You only want the CPU to be allocated during request processing. 
 You don't want the CPU to be always be allocated because it's gonna cost you more. You want to disable Autoscaling so you just want to have one instance, m   inimum one instance maximum. 
   
-[FlaskApp](images/cpu-allocation.png)   
+[CPU Allocation](images/cpu-allocation.png)   
   
 I want to allow all traffic because this container should be accessible from everywhere. 
 I don't want to have any. 
   
-[FlaskApp](images/ingress.png)
+[Ingress](images/ingress.png)
   
 Google's authentication systems you are going to allow all unauthenticated notifications as well.  
   
-[FlaskApp](images/authenthication.png)
+[Authentication](images/authenthication.png)
 
 And then I need to go and change a few more changes here. I need to change this container board to 5000 because this is a class camp. Last lessons to 5000, so I need to tell my container that any request you get on port 80 needs to be forwarded to port 5000. 
 
-[FlaskApp](images/container-port.png)
+[Container Port](images/container-port.png)
 
 
   
