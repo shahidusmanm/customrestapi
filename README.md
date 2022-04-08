@@ -141,8 +141,9 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 #### -----------------------------------------------------------------------
 
-![FlaskApp](/images/flaskapp.png)  
+![FlaskApp](images/Flaskapp.png) 
   
+ 
 <br><br>
 ## Creating the Docker Image
 <p align="left">
