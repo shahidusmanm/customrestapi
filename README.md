@@ -141,9 +141,6 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 #### -----------------------------------------------------------------------
 
-![FlaskApp](images/Flaskapp.png) 
-  
- 
 <br><br>
 ## Creating the Docker Image
 <p align="left">
@@ -203,8 +200,11 @@ cloud.google.com
 And from our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google so we can see there's a flask app repository already available here and it is in. 
 
   
+![FlaskApp](images/Flaskapp.png) 
   
-  It's in a Docker format and it's deployed in Europe Dash West too, which is their London based data center. 
+It is in a Docker format and it is deployed in Europe-West2, which is their London based data center.
+  
+  
   
   
   
