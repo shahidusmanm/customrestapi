@@ -221,7 +221,7 @@ You can see that we just pushed in cloudflaskappdeployment_gcp so open it.
 You can see that there's a the container there, just deployed V5. 
 It's stacked as version five, so you know it was created one minute ago, and now you can go to cloud down and import, this can go to cloud run.
   
-![Cloud Run](images/cloud-run.png) 
+![Cloud Run](images/cloud-run2.png) 
 
 If you want to create a new service, you can go to create a service.
   
