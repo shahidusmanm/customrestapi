@@ -178,10 +178,9 @@ Then it needs to have the the project name for our project in our Google account
 ``` 
 docker build . --tag-europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5
 ``` 
-And I'm gonna run this. It's gonna take a couple of seconds to run. 
+And we're going run this and it's gonna take a couple of seconds to run and create our image file. 
 
-And create my image file. 
-
+Once the image file is created, we can just go and push it onto our artifact registry on Google.  For that we need to use the Docker push command followed by the name of the registry, the name of the registry and repository where I want to push our container. 
   
   
   
