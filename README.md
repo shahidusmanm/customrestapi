@@ -261,17 +261,17 @@ And then I need to go and change a few more changes here. I need to change this 
 
 I'm going to reduce the memory capacity because I don't need 512MB.  I'm gonna skip one CPU. 
 
-![Container Port](images/capacity.png)
+![Capacity](images/capacity.png)
   
 And I'm going to leave everything as default just and then go and create my container. 
   
 So contain creating the container takes a bit of time, but now that it's done I have the the URL. 
 
-![Container Port](images/container-URL.png)
+![Container URL](images/container-URL.png)
   
 Here you can just copy it and then use it on any postman application I have and then it's going to work with mine and that's how we went ahead and created our or deployed our task app on to Google's cloud platform. 
   
-![Container Port](images/postman.png)
+![Postman](images/postman.png)
   
   
 #### -----------------------------------------------------------------------
