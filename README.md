@@ -10,17 +10,13 @@
     - [CRUD functions](#crud-functions)
   - [Creating a Docker Image](#Creating-a-Docker-Image)
 
-
-
-
 ## About 
 
-
+<br><br>
 
 ## System Architecture
 
-
-
+<br><br>
 
 ## Database Setup 
 We used the following commands to create the database in GCP:
@@ -188,20 +184,6 @@ username, user_api_key)
 
 If any confusion arises, please inspect and follow the guidance in the error messages returned by the REST API.
 
-
-
-
-
-
-
-
-
-
-
-
-#### -----------------------------------------------------------------------
-
-<br><br>
 ## Creating the Docker Image
   
 ![FlaskApp](images/docker-file.png)   
