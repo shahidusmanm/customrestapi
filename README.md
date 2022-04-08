@@ -6,7 +6,7 @@
   - [REST API](#rest-api)
         - [To create an account](#to-create-an-account)
         - [To log in](#to-log-in)
-
+  - [Creating a Docker Image](#Creating-a-Docker-Image)
 
 
 
@@ -141,8 +141,35 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 #### -----------------------------------------------------------------------
 
+<br><br>
+## Creating the Docker Image
+<p align="left">
+  <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" height="40" />
+</p>
 
+I'm gonna be walking us through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
 
+The first thing we did was we created a Docker file. 
+
+This Docker file is very basic. 
+  
+ 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+#### -----------------------------------------------------------------------
 
 <br><br>
 ##### Creating the Docker Image
