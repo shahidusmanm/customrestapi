@@ -244,22 +244,24 @@ I want to deploy this in London, so I'm gonna go and select.
 You only want the CPU to be allocated during request processing. 
 You don't want the CPU to be always be allocated because it's gonna cost you more. You want to disable Autoscaling so you just want to have one instance, minimum one instance maximum. 
 
-[CPU Allocation](images/cpu-allocation.png)   
+![CPU Allocation](images/cpu-allocation.png)   
   
 I want to allow all traffic because this container should be accessible from everywhere. 
 I don't want to have any. 
   
-[Ingress](images/ingress.png)
+![Ingress](images/ingress.png)
   
 Google's authentication systems you are going to allow all unauthenticated notifications as well.  
   
-[Authentication](images/authenthication.png)
+![Authentication](images/authenthication.png)
 
 And then I need to go and change a few more changes here. I need to change this container board to 5000 because this is a class camp. Last lessons to 5000, so I need to tell my container that any request you get on port 80 needs to be forwarded to port 5000. 
 
-[Container Port](images/container-port.png)
+![Container Port](images/container-port.png)
 
+I'm going to reduce the memory capacity because I don't need 512MB.  I'm gonna skip one CPU. 
 
+![Container Port](images/capacity.png)
   
   
   
