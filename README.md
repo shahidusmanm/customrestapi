@@ -255,8 +255,9 @@ Google's authentication systems you are going to allow all unauthenticated notif
   
 [FlaskApp](images/authenthication.png)
 
-And then I need to go and change a few more changes here. 
+And then I need to go and change a few more changes here. I need to change this container board to 5000 because this is a class camp. Last lessons to 5000, so I need to tell my container that any request you get on port 80 needs to be forwarded to port 5000. 
 
+[FlaskApp](images/container-port.png)
 
 
   
