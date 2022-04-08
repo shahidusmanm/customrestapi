@@ -141,6 +141,10 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 #### -----------------------------------------------------------------------
 
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)  
+  
+  
 <br><br>
 ## Creating the Docker Image
 <p align="left">
@@ -209,7 +213,11 @@ And from our console we are going to go to the artifact registry by typing artif
   
   
 #### -----------------------------------------------------------------------
+  
+  
 
+  
+  
 <br><br>
 ##### Creating the Docker Image
 <p align="left">
