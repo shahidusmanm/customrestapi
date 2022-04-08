@@ -189,11 +189,19 @@ It's gonna be:
 docker push europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5  
 ```   
   
+So the thing to note here is that there's been no change between versions 3-4 and five that I've uploaded, so it said that this this file, or this container already exists, so it you know it just retagged. It didn't put it again. 
+  
+You can actually go to your cloud Google console.  Let us go to our console. 
+
+``` 
+cloud.google.com
+``` 
+ 
+And from our console we are going to go to the artifact registry by typing artifact registry in the search box at the top of the page which is basically the container registry on Google so we can see there's a flask app repository already available here and it is in. 
+
   
   
-  
-  
-  
+  It's in a Docker format and it's deployed in Europe Dash West too, which is their London based data center. 
   
   
   
