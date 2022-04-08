@@ -242,8 +242,8 @@ I want to deploy this in London, so I'm gonna go and select.
 ![Region](images/region.png) 
 
 You only want the CPU to be allocated during request processing. 
-You don't want the CPU to be always be allocated because it's gonna cost you more. You want to disable Autoscaling so you just want to have one instance, m   inimum one instance maximum. 
-  
+You don't want the CPU to be always be allocated because it's gonna cost you more. You want to disable Autoscaling so you just want to have one instance, minimum one instance maximum. 
+
 [CPU Allocation](images/cpu-allocation.png)   
   
 I want to allow all traffic because this container should be accessible from everywhere. 
