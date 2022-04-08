@@ -230,7 +230,7 @@ If you want to create a new service, you can go to create a service.
 I need to show or tell it where to get the container from so I'm gonna click on select. 
 My containers was stored in the artifact industry, so I'm going to go here. 
 
-![FlaskApp](images/container-image-URL.png) 
+![FlaskApp](images/container-image-URL2.png) 
 
 This is the repository I want to upload. 
 
