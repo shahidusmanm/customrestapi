@@ -246,6 +246,17 @@ You don't want the CPU to be always be allocated because it's gonna cost you mor
   
 [FlaskApp](images/cpu-allocation.png)   
   
+I want to allow all traffic because this container should be accessible from everywhere. 
+I don't want to have any. 
+  
+[FlaskApp](images/ingress.png)
+  
+Google's authentication systems you are going to allow all unauthenticated notifications as well.  
+  
+[FlaskApp](images/authenthication.png)
+
+And then I need to go and change a few more changes here. 
+
 
 
   
