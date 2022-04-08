@@ -173,8 +173,15 @@ docker build . --tag-europe-west2-docker.pkg.dev/
 So this needs to be the stack needs to be in a specific name because I want to. Once I've built this image, I want to push it to Google's artifact registry directly using Docker push. To do that I need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of my artifact registry, which is europe-west2-docker.pkg.dev. 
   
 
+Then it needs to have the the project name for our project in our Google account, it's going to be cloud computing Flask app. deployment under score, GCP, and we are gonna tag it with the version name. So I've already uploaded versions 123 and four so I'm gonna push this as the version 5.
   
-  
+``` 
+docker build . --tag-europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5
+``` 
+And I'm gonna run this. It's gonna take a couple of seconds to run. 
+
+And create my image file. 
+
   
   
   
