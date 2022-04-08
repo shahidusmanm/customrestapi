@@ -164,9 +164,15 @@ EXPOSE 80
 CMD ["python", "main.py"]
 ``` 
   
+So to do that we used the Docker build command prompt, write it right, OK, tag it. With a specific name. Press 2 dash docker. 
+
+``` 
+docker build . --tag-europe-west2-docker.pkg.dev/
+``` 
+
+So this needs to be the stack needs to be in a specific name because I want to. Once I've built this image, I want to push it to Google's artifact registry directly using Docker push. To do that I need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of my artifact registry, which is europe-west2-docker.pkg.dev. 
   
-  
-  
+
   
   
   
