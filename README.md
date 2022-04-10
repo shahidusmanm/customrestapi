@@ -268,7 +268,7 @@ If you want to create a new service, you can go to create a service.
   
 ![Create Service](images/create-service.png) 
   
-We need to show or tell you where to get the container from so we are going to click on select it.  My containers were stored in the artifact industry, so we are going to go here. 
+We need to show or tell you where to get the container from so we are going to click on select it.  Our containers were stored in the artifact industry, so we are going to go here. 
 
 ![ContainerImageURL2](images/container-image-URL2.png) 
 
