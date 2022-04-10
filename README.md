@@ -190,7 +190,7 @@ username, user_api_key)
 
 If any confusion arises, please inspect and follow the guidance in the error messages returned by the REST API.
 
-## Creating the Docker Image
+## Creating a Docker Image
   
 ![docker-file](images/docker-file.png)   
 
