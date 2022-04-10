@@ -272,11 +272,11 @@ We need to show or tell you where to get the container from so we are going to c
 
 ![ContainerImageURL2](images/container-image-URL2.png) 
 
-This is the repository we want to upload. 
+This is the repository we want to upload so select this. 
 
 ![Select Container](images/select-container.png) 
 
-This is the repository we want to upload so select this.  We want to deploy this in London, so we are going to go and select this
+We want to deploy this in London, so we are going to go and select this
   
 ![Region](images/region.png) 
 
