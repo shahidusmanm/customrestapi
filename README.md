@@ -9,6 +9,7 @@
     - [To log in](#to-log-in)
     - [CRUD functions](#crud-functions)
   - [Creating a Docker Image](#creating-a-docker-image)
+  - [Authentication](#Authentication)
   - [Conclusion](#conclusion)
   - [Disclaimer](#disclaimer)
 
@@ -86,7 +87,10 @@ This REST API serves as a simple way to create and manage tasks across teams of 
 
 The technology stack used to create this API includes a Cloud SQL database (GCP), Python and Docker.
 
+We have made a collection of all the APIs that are working on postman. You just need to change the endpoint from our localhost (127.0.0.1) to the GCP URL.
+
 Use the following URL API path:
+https://www.getpostman.com/collections/9ab1b3503ce1c60fa924
 
 ## To create an account:
 
@@ -309,7 +313,12 @@ Here you can just copy the URL and use it on any postman application we have and
   
 ![Postman](images/postman.png)
   
+## Authentication
   
+  
+We have deployed the app on GCP and its accessible through this endpoint and it can be whatever you need to do e.g., /login or /view/tasks etc:
+https://cloudflaskdeployment-gcp-unojqxgjbq-nw.a.run.app
+
 ## Conclusion
 The reason why we chose a task API system is because there are many applications out there that provide this sort of service, for example, you can see the industry use applications such as JIRA and Monday.  So, we thought it would be interesting to try and replicate some sort of application but using endpoints in a VM instance.  So that is our report. I hope it was informative and thank you for reading.  
 
