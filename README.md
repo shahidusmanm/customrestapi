@@ -9,6 +9,7 @@
     - [To log in](#to-log-in)
     - [CRUD functions](#crud-functions)
   - [Creating a Docker Image](#creating-a-docker-image)
+  - [Conclusion](#conclusion)
 
 ## About 
 
