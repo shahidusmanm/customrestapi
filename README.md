@@ -215,13 +215,13 @@ EXPOSE 80
 CMD ["python", "main.py"]
 ``` 
   
-So to do that we used the Docker build command prompt, type below With a specific name 
+So to do that we used the Docker build command prompt, type below with a specific name 
 
 ``` 
 docker build . --tag-europe-west2-docker.pkg.dev/
 ``` 
 
-So this needs to be in a specific name because once you've built this image, you want to push it to Google's artifact registry directly using Docker push. To do that you need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of our artifact registry, which is europe-west2-docker.pkg.dev. 
+So this needs to be in a specific name because once have built this image, you want to push it to Google's artifact registry directly using Docker push. To do that you need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of our artifact registry, which is europe-west2-docker.pkg.dev. 
 
 Then it needs to have the the project name for our project in our Google account, it's going to be cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5, with the version name to version 5 as we have already uploaded versions 123 and 4.
   
