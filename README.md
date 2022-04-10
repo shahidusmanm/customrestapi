@@ -10,6 +10,7 @@
     - [CRUD functions](#crud-functions)
   - [Creating a Docker Image](#creating-a-docker-image)
   - [Conclusion](#conclusion)
+  - [Disclaimer](#disclaimer)
 
 ## About 
 
@@ -311,4 +312,6 @@ Here you can just copy the URL and use it on any postman application we have and
   
 ## Conclusion
 The reason why we chose a task API system is because there are many applications out there that provide this sort of service, for example, you can see the industry use applications such as JIRA and Monday.  So, we thought it would be interesting to try and replicate some sort of application but using endpoints in a VM instance.  So that is our report. I hope it was informative and thank you for reading.  
+
+## Disclaimer
 
