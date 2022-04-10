@@ -251,11 +251,7 @@ From our console we are going to go to the artifact registry by typing artifact 
   
 ![Artifact Registry](images/artifact-registry.png)  
   
-We can see there's a flask app repository already available here. 
-  
-![FlaskApp](images/Flaskapp.png) 
-  
-It is in a Docker format, and it is deployed in Europe-West2, which is their London based data centre, so you click on it.  
+We can see there's a flask app repository already available here. It is in a Docker format, and it is deployed in Europe-West2, which is their London based data centre, so you click on flaskapp link here.  
   
 ![repositories](images/repositories.png) 
 
