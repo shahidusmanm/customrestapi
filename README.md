@@ -325,4 +325,4 @@ The reason why we chose a task API system is because there are many applications
 ## Disclaimer
 This project is part of a cloud computing mini project assignment taught by Dr. Sukhpal Singh Gill at the Queen Mary University of London Electrical Engineering & Computer Science Department to create a prototype of a cloud application.
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
