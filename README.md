@@ -12,11 +12,17 @@
 
 ## About 
 
-<br><br>
+Welcome to our group project, the Task Manager API and we are going to write about our own cloud computing project using the Flask, Python And database cloud computing in VM instances.
+
+The project we chose was to build a task Manager API application where users can track their tasks that they have been assigned for the day and then a user and a user side as well, so there's usual authentication in our team.
 
 ## System Architecture
 
-<br><br>
+The system is mostly involved on the database and also authentication that worked with the Flask, API and VM instance setup as well as the Docker image.
+
+We are going to write about the cloud, Google Cloud, SQL database, the architecture of the system, how it connects between the Google Cloud VM instance and the Google Cloud database.
+
+We also write about the CRUD applications that we used, so some of our tasks, so adding tasks, leading tasks, those sort of crud features, and then as well how we deployed the application onto the Google Cloud VM instance and how it's using a Docker image so it's available through endpoint calls.
 
 ## Database Setup 
 We used the following commands to create the database in GCP:
