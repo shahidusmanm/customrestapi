@@ -11,6 +11,7 @@
   - [Creating a Docker Image](#creating-a-docker-image)
   - [Authentication](#Authentication)
   - [Conclusion](#conclusion)
+  - 
   - [Disclaimer](#disclaimer)
 
 ## About 
@@ -322,6 +323,10 @@ https://cloudflaskdeployment-gcp-unojqxgjbq-nw.a.run.app
 ## Conclusion
 The reason why we chose a task API system is because there are many applications out there that provide this sort of service, for example, you can see the industry use applications such as JIRA and Monday.  So, we thought it would be interesting to try and replicate some sort of application but using endpoints in a VM instance.  So that is our report. I hope it was informative and thank you for reading.  
 
+YouTube Video:
+
+https://www.youtube.com/watch?v=WCVUuB051_U
+  
 ## Disclaimer
 This project is part of a cloud computing mini project assignment taught by Dr. Sukhpal Singh Gill at the Queen Mary University of London Electrical Engineering & Computer Science Department to create a prototype of a cloud application.
 
