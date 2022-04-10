@@ -11,7 +11,7 @@
   - [Creating a Docker Image](#creating-a-docker-image)
   - [Authentication](#Authentication)
   - [Conclusion](#conclusion)
-  - [YouTube](#youtube)
+  - [YouTube Video](#youtube-video)
   - [Disclaimer](#disclaimer)
 
 ## About 
