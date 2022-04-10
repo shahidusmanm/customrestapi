@@ -257,7 +257,7 @@ We can see there's a flask app repository already available here.
   
 It is in a Docker format, and it is deployed in Europe-West2, which is their London based data centre, so you click on it.  
   
-![Cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
+![repositories](images/repositories.png) 
 
 You can see that we just pushed in cloudflaskappdeployment_gcp so click on it. 
   
