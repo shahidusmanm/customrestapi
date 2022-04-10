@@ -306,7 +306,7 @@ Creating the container takes a bit of time, but now that it is done, we have the
 
 ![Container URL](images/container-URL2.png)
   
-Here you can just copy the URL and use it on any postman application we have and then it is going to work with mine and that's how we went ahead and created our or deployed our task app on to Google's cloud platform. 
+Here you can just copy the URL and use it on any postman application we have and then it is going to work with ours and that is how we went ahead and created our deployed task app on to Google's cloud platform. 
   
 ![Postman](images/postman.png)
   
