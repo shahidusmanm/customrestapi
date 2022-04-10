@@ -8,7 +8,7 @@
     - [To create an account](#to-create-an-account)
     - [To log in](#to-log-in)
     - [CRUD functions](#crud-functions)
-  - [Creating a Docker Image](#Creating-a-Docker-Image)
+  - [Creating a Docker Image](#creating-a-docker-image)
 
 ## About 
 
@@ -192,7 +192,7 @@ If any confusion arises, please inspect and follow the guidance in the error mes
 
 ## Creating the Docker Image
   
-![FlaskApp](images/docker-file.png)   
+![docker-file](images/docker-file.png)   
 
 We are going to walk through how we created a docker container for our flask application and then deployed it on the Google Cloud run. 
 
