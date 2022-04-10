@@ -12,7 +12,7 @@
 
 ## About 
 
-Welcome to our group project, the Task Manager API and we are going to write about our own cloud computing project using the Flask, Python And database cloud computing in VM instances.
+Welcome to our group project, the Task Manager API and we are going to write about our own cloud computing project using the Flask, Python and database cloud computing in VM instances.
 
 The project we chose was to build a task Manager API application where users can track their tasks that they have been assigned for the day and then a user and a user side as well, so there's usual authentication in our team.
 
