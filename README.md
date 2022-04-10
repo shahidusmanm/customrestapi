@@ -205,7 +205,7 @@ We are going to walk through how we created a docker container for our flask app
 
 The first thing we did was we created a Docker file.  This Docker file is very basic. 
  
-There's nothing new and once this file is created we actually went ahead and built our container. 
+There's nothing new and once this file is created, we actually went ahead and built our container. 
 
 ```
 FROM python:3.7-alpine
@@ -216,30 +216,30 @@ EXPOSE 80
 CMD ["python", "main.py"]
 ``` 
   
-So to do that we used the Docker build command prompt, type below with a specific name 
+So, to do that we used the Docker build command prompt, type below with a specific name 
 
 ``` 
 docker build . --tag-europe-west2-docker.pkg.dev/
 ``` 
 
-So this needs to be in a specific name because once have built this image, you want to push it to Google's artifact registry directly using Docker push. To do that you need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of our artifact registry, which is europe-west2-docker.pkg.dev. 
+So, this needs to be in a specific name because once have built this image, you want to push it to Google's artifact registry directly using Docker push. To do that you need to make sure that the tag or name of the image is in a specific format.  That specific format is the location of our artifact registry, which is europe-west2-docker.pkg.dev. 
 
-Then it needs to have the the project name for our project in our Google account, it's going to be cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5, with the version name to version 5 as we have already uploaded versions 123 and 4.
+Then it needs to have the project name for our project in our Google account, it's going to be cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5, with the version name to version 5 as we have already uploaded versions 123 and 4.
   
 ``` 
 docker build . --tag-europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5
 ``` 
-And we're going run this and it's gonna take a couple of seconds to run and create our image file. 
+And we're going run this and it's going to take a couple of seconds to run and create our image file. 
 
 Once the image file is created, we can just go and push it onto our artifact registry on Google.  For that we need to use the Docker push command followed by the name of the registry, the name of the registry and repository where we want to push our container. 
   
-It's gonna be:
+It's going to be:
 
 ``` 
 docker push europe-west2-docker.pkg.dev/cloudcomputingapp-346212/flaskapp/cloudflaskappdeployment_gcp:v5  
 ```   
   
-So the thing to note here is that there's been no change between versions 3-4 and 5 that we have uploaded, so this container already exists, so it you know it just retagged and it didn't put it again. 
+So, the thing to note here is that there's been no change between versions 3-4 and 5 that we have uploaded, so this container already exists, so it you know it just retagged and it didn't put it again. 
   
 You can actually go to your cloud Google console.  Let us go to our console. 
 
@@ -255,7 +255,7 @@ We can see there's a flask app repository already available here.
   
 ![FlaskApp](images/Flaskapp.png) 
   
-It is in a Docker format and it is deployed in Europe-West2, which is their London based data center so you click on it.  
+It is in a Docker format, and it is deployed in Europe-West2, which is their London based data centre, so you click on it.  
   
 ![Cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
 
@@ -263,7 +263,7 @@ You can see that we just pushed in cloudflaskappdeployment_gcp so click on it.
   
 ![cloudflaskappdeployment_gcp](images/cloudflaskappdeployment_gcp.png) 
   
-You can see that there's a the container there, just deployed V5. 
+You can see that there's a container there, just deployed V5. 
 It's stacked as version five, so you know it was created one minute ago, and now we can go to cloud down and import, this can go to cloud run.
   
 ![Cloud Run](images/cloud-run2.png) 
@@ -272,19 +272,19 @@ If you want to create a new service, you can go to create a service.
   
 ![Create Service](images/create-service.png) 
   
-We need to show or tell you where to get the container from so we are going to click on select it.  My containers was stored in the artifact industry, so we are going to go here. 
+We need to show or tell you where to get the container from so we are going to click on select it.  My containers were stored in the artifact industry, so we are going to go here. 
 
-![FlaskApp](images/container-image-URL2.png) 
+![ContainerImageURL2](images/container-image-URL2.png) 
 
 This is the repository we want to upload. 
 
 ![Select Container](images/select-container.png) 
 
-This is the repository we want to upload so select this.  We want to deploy this in London, so we are gonna go and select this
+This is the repository we want to upload so select this.  We want to deploy this in London, so we are going to go and select this
   
 ![Region](images/region.png) 
 
-You only want the CPU to be allocated during request processing.  You don't want the CPU to be always be allocated because it's going to cost you more. You want to disable Autoscaling so you just want to have one instance minimum and maximum. 
+You only want the CPU to be allocated during request processing.  You don't want the CPU to always be allocated because it's going to cost you more. You want to disable Autoscaling, so you just want to have one instance minimum and maximum. 
 
 ![CPU Allocation](images/cpu-allocation.png)   
   
@@ -306,7 +306,7 @@ We are going to reduce the memory capacity because we don't need 512MB and we ar
   
 We are going to leave everything as default and then go and create our container. 
   
-Creating the container takes a bit of time, but now that it is done we have the URL. 
+Creating the container takes a bit of time, but now that it is done, we have the URL. 
 
 ![Container URL](images/container-URL2.png)
   
