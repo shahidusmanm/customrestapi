@@ -4,6 +4,7 @@ from flask import jsonify, request
 import secrets
 import hashlib
 
+# initialising database details
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
 db_password = os.environ.get('CLOUD_SQL_PASSWORD')
 db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
@@ -21,8 +22,8 @@ def open_connection():
 def add_user(user):
     conn = open_connection()
     with conn.cursor() as cursor:
-        cursor.execute('INSERT INTO cloudcomputingtask.tbl_users (user_api_key,user_created_datetime,user_email, user_fname, user_lname, user_password, user_md5_pass) VALUES(%s,NOW(),%s, %s, %s,%s, %s)',
-        (secrets.token_urlsafe(10),user["user_email"],user["user_fname"], user["user_lname"], user["user_password"], hashlib.md5(user["user_password"].encode('utf-8'))))
+        cursor.execute('INSERT INTO cloudcomputingtask.tbl_users (user_created_datetime, username,user_email, user_fname, user_lname, user_md5_pass, role) VALUES(NOW(),%s, %s, %s,%s, %s, "admin")',
+        (user['username'],user["user_email"],user["user_fname"], user["user_lname"], hashlib.md5(user["user_password"].encode('utf-8')).hexdigest()))
     conn.commit()
     conn.close()
 
@@ -30,12 +31,14 @@ def add_user(user):
 def get_users():
     conn = open_connection()
     with conn.cursor() as cursor:
-        result = cursor.execute('SELECT * FROM cloudcomputingtask.tbl_users')
-        users= cursor.fetchall()
+
+        # If task_id has not been specified, read all of a user's tasks
+        result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users')
+        tasks = cursor.fetchall()
         if result > 0:
-            answer = jsonify(users)
+            answer = tasks
         else:
-            answer = 'No Users Found'
+            answer = 'No user found'
     conn.close()
     return answer
 
@@ -48,24 +51,24 @@ def update_user(user):
     conn.close()
 
 # DELETE function to delete a user by id
-def del_user(userid):
+def del_user(username):
     conn = open_connection()
     with conn.cursor() as cursor:
-        result = cursor.execute('DELETE FROM cloudcomputingtask.tbl_users WHERE (user_id) = (%s)', (userid))
+        result = cursor.execute('DELETE FROM cloudcomputingtask.tbl_users WHERE (username) = (%s)', (username))
     conn.commit()
     conn.close()
 
 # READ function to see single user
 def get_user(name):
     conn = open_connection()
-    first_name, last_name = name.split(' ')
     with conn.cursor() as cursor:
-        result = cursor.execute('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_fname = %s AND user_lname=%s',
-        (first_name, last_name))
-        user = cursor.fetchall()
+
+        # If task_id has not been specified, read all of a user's tasks
+        result = cursor.execute ('SELECT * FROM cloudcomputingtask.tbl_users WHERE username = %s', (name))
+        tasks = cursor.fetchall()
         if result > 0:
-            answer = jsonify(user)
+            answer = tasks
         else:
-            answer = 'No Users Found'
+            answer = 'No user found'
     conn.close()
     return answer

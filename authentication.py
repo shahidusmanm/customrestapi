@@ -48,3 +48,15 @@ def auth (user_api_key):
 
     else:
         return True
+
+# function to check for admin priviledges 
+def admin(user_api_key):
+    conn = open_connection()
+    with conn.cursor() as cursor:
+        is_admin = cursor.execute('SELECT * FROM cloudcomputingtask.tbl_users WHERE user_api_key = %s AND role = %s', (user_api_key, "admin"))
+    conn.close()
+    if is_admin == 0:
+        return False
+    else:
+        return True
+    
