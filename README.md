@@ -70,18 +70,6 @@ INSERT INTO tbl_tasks (user_id, user_api_key, task_title, task_description, task
 VALUES (2,'pWJn2HDoN4','Create our Project Video','Got to do big things!',0,NOW(),NOW());
 ```
 
-Finally using the GCP UI we were able to configure the database and setup the connection details:
-
-```
-#app.yaml
-runtime: python37
-
-env_variables:
-  CLOUD_SQL_USERNAME: root
-  CLOUD_SQL_PASSWORD: cloudcomputingtasks
-  CLOUD_SQL_DATABASE_NAME: cloudcomputingtask
-  CLOUD_SQL_CONNECTION_NAME: cloudcomputingcw-343618:europe-west2:cloudcomputingtasks
-```
 
 ## REST API
 This REST API serves as a simple way to create and manage tasks across teams of users. It facilitates the creation, reading, updating and deletion of tasks and users with hash-based authentication and admin permissions.
