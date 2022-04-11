@@ -22,9 +22,9 @@ The project we chose was to build a task Manager API application where users can
 
 ## System Architecture
 
-The system is mostly involved on the database and also authentication that worked with the Flask, API and VM instance setup as well as the Docker image.
+The system contains a Flask app communicating with a SQL database. The app is deployed on a container on Google Cloud Run.
 
-We are going to write about the cloud, Google Cloud, SQL database, the architecture of the system, how it connects between the Google Cloud VM instance and the Google Cloud database.
+We are going to write about the cloud, Google Cloud, SQL database, the architecture of the system, how it connects between the Google Cloud Run container instance and the Google Cloud database.
 
 We also write about the CRUD applications that we used, so some of our tasks, so adding tasks, leading tasks, those sort of crud features, and then as well how we deployed the application onto the Google Cloud VM instance and how it's using a Docker image so it's available through endpoint calls.
 
@@ -60,14 +60,14 @@ FOREIGN KEY(username) REFERENCES tbl_users(username)
 We created some dummy data to initially add to the database so we could test the GET commands:
 
 ```
-INSERT INTO tbl_users (username, user_fname, user_lname, user_email, user_md5_pass, user_api_key, user_created_datetime) VALUES ('john.test','john', 'test', 'john_test@email.com', '81dc9bdb52d04dc20036dbd8313ed055', 'pWJn2HDoN4', NOW());
+INSERT INTO tbl_users (username, user_fname, user_lname, user_email, user_md5_pass, user_api_key, user_created_datetime) VALUES ('john.test','john', 'test', 'john_test@email.com', '81dc9bdb52d04dc20036dbd8313ed055', '', NOW());
 
 
 INSERT INTO tbl_tasks (username, user_api_key, task_title, task_description, task_created_datetime, task_updated_datetime)
-VALUES ('ghop','pWJn2HDoN4','Complete Cloud Computing CW','Got to do big things!',NOW(),NOW());
+VALUES ('ghop','','Complete Cloud Computing CW','Got to do big things!',NOW(),NOW());
 
 INSERT INTO tbl_tasks (user_id, user_api_key, task_title, task_description, task_status, task_created_datetime, task_updated_datetime)
-VALUES (2,'pWJn2HDoN4','Create our Project Video','Got to do big things!',0,NOW(),NOW());
+VALUES (2,'','Create our Project Video','Got to do big things!',0,NOW(),NOW());
 ```
 
 
